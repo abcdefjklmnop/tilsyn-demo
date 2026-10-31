@@ -44,10 +44,6 @@ JavaScript-syntakskontroll er kjørt, og grensesnittet er testet i nettleser for
 
 Dette er funksjonell testing av grensesnittet. Det finnes ingen klinisk validering, brukertesting eller tilgjengelighetsrevisjon.
 
-## Bakgrunn
-
-Prosjektet inngår i Karos Mokrians portefølje og er utviklet med KI-assistanse. Beskrivelsene over gjelder det koden faktisk demonstrerer.
-
 ## Lisens
 
 MIT – se [LICENSE](LICENSE).
