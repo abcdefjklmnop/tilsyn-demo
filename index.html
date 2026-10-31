@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#134f49">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Tilsyn — en enklere vei fra observasjon til notat</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Gå til tilsyn</a>
+  <div class="demo-banner"><span class="demo-dot"></span><strong>INTERAKTIV DEMO</strong><span>Kun fiktive opplysninger. Ingen lagring eller forbindelse til pasientjournal.</span></div>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Tilsyn, start demonstrasjon"><span class="brand-icon" aria-hidden="true">✦</span><span>Tilsyn<span class="brand-sub">Nær pasienten. Nær observasjonen.</span></span></a>
+    <button id="about-button" class="button ghost">Om demonstrasjonen <span aria-hidden="true">↗</span></button>
+  </header>
+  <main id="main" class="layout">
+    <section class="workspace" aria-labelledby="page-title">
+      <div class="eyebrow">FRA PAPIR TIL ET GJENNOMGÅTT NOTAT</div>
+      <h1 id="page-title">Tilsynet starter her.</h1>
+      <p class="lead">Registrer det du faktisk observerer, mens du er hos pasienten.</p>
+      <section class="patient-card" aria-labelledby="patient-name">
+        <div class="patient-top"><div class="avatar" aria-hidden="true">A</div><div><div class="micro">FIKTIV PASIENT</div><h2 id="patient-name">Demopasient A</h2><p>ID DEMO-001 · Demoavdeling</p></div><span class="tag">Øvelse</span></div>
+        <label class="check-line"><input type="checkbox" id="identity"><span>Jeg har valgt riktig demopasient.</span></label>
+      </section>
+      <div class="visit-meta"><label for="visit-time">Tidspunkt for observasjonen<input type="datetime-local" id="visit-time" required></label><div><span class="field-label">Type tilsyn</span><div class="segments" role="group" aria-label="Type tilsyn"><button type="button" class="segment selected" data-kind="Tilsyn" aria-pressed="true">Tilsyn</button><button type="button" class="segment" data-kind="Nattilsyn" aria-pressed="false">Nattilsyn</button></div></div></div>
+      <div class="section-intro"><h2>Hva observerte og gjorde du?</h2><p>Velg «ikke vurdert» når du ikke har grunnlag for å svare.</p></div>
+      <div id="questions"></div>
+      <section class="question extra-section"><label class="question-title" for="extra"><span class="number">+</span>Andre relevante opplysninger <span class="optional">valgfritt</span></label><p class="hint">Bruk bare oppdiktede eksempler i denne demoen.</p><textarea id="extra" maxlength="1200" rows="3" placeholder="Skriv en kort, konkret observasjon …"></textarea></section>
+      <div class="form-footnote">Dette er et eksempel på arbeidsflyt. Spørsmålene må tilpasses pasientens plan og avdelingens faglige rutiner før reell bruk.</div>
+    </section>
+    <aside class="preview-column" aria-labelledby="preview-title">
+      <div class="preview-card">
+        <div class="preview-header"><span class="eyebrow">ORDENE SAMLES UNDERVEIS</span><span class="draft-badge" id="note-status">Utkast</span></div>
+        <h2 id="preview-title">Notatet ditt</h2>
+        <p class="preview-description">Bygget av valgene dine. Du leser og retter før du bekrefter.</p>
+        <div class="progress-row"><span id="progress-label">0 av 4 punkter besvart</span><span id="progress-percent">0 %</span></div>
+        <progress id="progress" value="0" max="4" aria-label="Besvarte punkter"></progress>
+        <div id="note-preview" class="note-preview" aria-label="Forhåndsvisning av notatet"></div>
+        <p id="followup-reminder" class="notice" hidden>Å skrive om oppfølging varsler ingen. Kontakt ansvarlig person etter avdelingens rutiner.</p>
+        <div class="status-line" id="completion-status" role="status">Velg observasjonene dine for å lage et utkast.</div>
+        <button id="review-button" class="button primary wide">Gjennomgå utkast <span aria-hidden="true">→</span></button>
+        <button id="reset-button" class="button quiet wide">Start demonstrasjonen på nytt</button>
+        <div class="delivery-state"><span aria-hidden="true">○</span><span><strong>Ikke journalført</strong><br>Overføring til journalsystem er ikke koblet til.</span></div>
+      </div>
+      <div class="benefit-card"><span class="benefit-icon" aria-hidden="true">↳</span><div><strong>Én observasjon. Ett notat.</strong><p>Målet er mindre dobbeltarbeid og bedre støtte til å huske det som er relevant.</p></div></div>
+    </aside>
+  </main>
+  <footer class="page-footer"><span>Tilsyn · Konsept for sykehjem</span><span>Ingen pasientdata · Ingen analyseverktøy · Ingen automatisk vurdering</span></footer>
+  <dialog id="review-dialog" aria-labelledby="review-title">
+    <div class="dialog-top"><span class="eyebrow">SISTE STEG I DEMONSTRASJONEN</span><button class="icon-button" id="close-review" aria-label="Lukk gjennomgang">×</button></div>
+    <h2 id="review-title">Stemmer notatet med det du gjorde?</h2><p>Les gjennom og rett eventuelle feil. Bare oppdiktede opplysninger.</p>
+    <label class="field-label" for="review-text">Redigerbart utkast</label><textarea id="review-text" rows="12" maxlength="6000"></textarea>
+    <label class="check-line review-check"><input type="checkbox" id="review-confirm"><span>Jeg har kontrollert pasient, tidspunkt og innhold i denne øvelsen.</span></label>
+    <p id="review-error" class="error" role="alert"></p><button id="confirm-button" class="button primary wide">Bekreft i demo</button><p class="small-note">Dette signerer eller sender ikke et journalnotat.</p>
+  </dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">EN IDÉ DU KAN PRØVE</span><button class="icon-button" id="close-about" aria-label="Lukk informasjon">×</button></div><h2 id="about-title">Dokumentasjon nær pasienten.</h2><p>Denne demonstrasjonen viser hvordan noen få valg og egne observasjoner kan bli et redigerbart utkast.</p><ul><li>Ingen pasientopplysninger skal legges inn.</li><li>Valgene finnes bare i denne fanen og forsvinner når siden lastes på nytt.</li><li>Ingen informasjon sendes til en server eller et journalsystem.</li><li>Ingen AI, diagnoser, risikoskår eller automatisk varsling.</li></ul><p>Før reell bruk må virksomheten godkjenne arbeidsflyten, faglig innhold, informasjonssikkerhet og koblingen til pasientjournalen.</p></dialog>
+  <dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">Starte en ny demonstrasjon?</h2><p>Valg og tekst i denne øvelsen blir fjernet.</p><div class="dialog-actions"><button id="cancel-reset" class="button ghost">Fortsett øvelsen</button><button id="confirm-reset" class="button primary">Start på nytt</button></div></dialog>
+  <noscript>Denne demonstrasjonen trenger JavaScript for å vise spørsmål og bygge et utkast.</noscript>
+</body>
+</html>
